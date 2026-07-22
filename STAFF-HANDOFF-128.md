@@ -21,15 +21,15 @@ Rejected class: screen-recording / TTS-only (see closed PR #201 discussion).
 | Embed | Landing “Watch walkthrough” → modal → `youtube-nocookie` iframe |
 | Gate | `VITE_WALKTHROUGH_YOUTUBE_ID` — button hidden until real YT id is set |
 | Branch | `veigapunk/walkthrough-yt` / commit with `feat: embed YouTube walkthrough` |
-| Mirror | https://github.com/VeigaPunk/flash |
-| Package | https://github.com/VeigaPunk/flash-bounty-128 |
+| Mirror | https://github.com/VeigaPunk/flash-bounty-128-package |
+| Package | https://github.com/VeigaPunk/flash-bounty-128-package-bounty-128 |
 | Gist | https://gist.github.com/VeigaPunk/095daab661527435e0c920cbc218b331 |
 
 Cherry-pick path (once a real-device YouTube id exists):
 
 ```bash
 # from commaai/flash
-git remote add veigapunk https://github.com/VeigaPunk/flash.git
+git remote add veigapunk https://github.com/VeigaPunk/flash-bounty-128-package.git
 git fetch veigapunk
 git cherry-pick <embed-commit-sha>
 # set VITE_WALKTHROUGH_YOUTUBE_ID in deploy env (or bake at build time)
@@ -68,6 +68,6 @@ Storyboard-only MP4s in orch workspaces are **not** claimable under the real-dev
 
 ## Live UI demo (not the bounty claim)
 
-- https://veigapunk.github.io/flash/
+- https://veigapunk.github.io/flash-bounty-128-package/
 - Embed uses **issue reference** YouTube `NAz5NGnaDKs` only so staff can click “Watch walkthrough”.
 - This is **not** a real-device film and does **not** claim the $100 by itself.
