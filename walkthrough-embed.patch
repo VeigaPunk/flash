@@ -1,0 +1,100 @@
+diff --git c/src/app/Flash.jsx w/src/app/Flash.jsx
+index 18a650b..ac7ac22 100644
+--- c/src/app/Flash.jsx
++++ w/src/app/Flash.jsx
+@@ -342,8 +342,59 @@ function Stepper({ steps, currentStep, onStepClick }) {
+   )
+ }
+ 
++// YouTube walkthrough (bounty #128). Deliverable is a YT upload showing real device + site.
++// Set WALKTHROUGH_YOUTUBE_ID after uploading the high-quality device walkthrough.
++const WALKTHROUGH_YOUTUBE_ID = import.meta.env.VITE_WALKTHROUGH_YOUTUBE_ID || ''
++
++function WalkthroughDialog({ videoId, onClose }) {
++  useEffect(() => {
++    const onKey = (e) => { if (e.key === 'Escape') onClose() }
++    window.addEventListener('keydown', onKey)
++    return () => window.removeEventListener('keydown', onKey)
++  }, [onClose])
++
++  return (
++    <div
++      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
++      role="dialog"
++      aria-modal="true"
++      aria-label="flash.comma.ai walkthrough"
++      onClick={onClose}
++    >
++      <div
++        className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl"
++        onClick={(e) => e.stopPropagation()}
++      >
++        <button
++          type="button"
++          onClick={onClose}
++          className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black"
++          aria-label="Close walkthrough"
++        >
++          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
++            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
++          </svg>
++        </button>
++        <div className="aspect-video w-full bg-black">
++          <iframe
++            className="h-full w-full"
++            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
++            title="flash.comma.ai walkthrough"
++            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
++            allowFullScreen
++            referrerPolicy="strict-origin-when-cross-origin"
++          />
++        </div>
++      </div>
++    </div>
++  )
++}
++
+ // Landing page component
+ function LandingPage({ onStart }) {
++  const [showWalkthrough, setShowWalkthrough] = useState(false)
++  const hasWalkthrough = Boolean(WALKTHROUGH_YOUTUBE_ID)
++
+   return (
+     <div className="wizard-screen flex flex-col items-center justify-center h-full gap-8 p-8">
+       <img src={comma} alt="comma" width={80} height={80} />
+@@ -353,12 +404,29 @@ function LandingPage({ onStart }) {
+           Restore your comma device to a fresh factory state
+         </p>
+       </div>
+-      <button
+-        onClick={onStart}
+-        className="px-12 py-4 text-2xl font-semibold rounded-full bg-[#51ff00] hover:bg-[#45e000] active:bg-[#3acc00] text-black transition-colors"
+-      >
+-        Start
+-      </button>
++      <div className="flex flex-col sm:flex-row items-center gap-4">
++        <button
++          onClick={onStart}
++          className="px-12 py-4 text-2xl font-semibold rounded-full bg-[#51ff00] hover:bg-[#45e000] active:bg-[#3acc00] text-black transition-colors"
++        >
++          Start
++        </button>
++        {hasWalkthrough && (
++          <button
++            type="button"
++            onClick={() => setShowWalkthrough(true)}
++            className="px-8 py-3 text-lg font-semibold rounded-full bg-black hover:bg-gray-800 active:bg-gray-700 text-white transition-colors"
++          >
++            Watch walkthrough
++          </button>
++        )}
++      </div>
++      {showWalkthrough && hasWalkthrough && (
++        <WalkthroughDialog
++          videoId={WALKTHROUGH_YOUTUBE_ID}
++          onClose={() => setShowWalkthrough(false)}
++        />
++      )}
+     </div>
+   )
+ }
