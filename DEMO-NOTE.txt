@@ -1,0 +1,5 @@
+UI DEMO ONLY for staff review of embed (bounty #128).
+Video ID NAz5NGnaDKs is the official example linked in the issue — NOT our device film.
+Real claim requires real-device YouTube + merged PR under VeigaPunk.
+Package: https://github.com/VeigaPunk/flash
+Handoff: STAFF-HANDOFF-128.md
