@@ -65,3 +65,9 @@ Storyboard-only MP4s in orch workspaces are **not** claimable under the real-dev
 - GitHub: VeigaPunk (cannot comment on commaai issues while blocked)
 - Package maintainer email via GitHub profile if needed
 
+
+## Live UI demo (not the bounty claim)
+
+- https://veigapunk.github.io/flash/
+- Embed uses **issue reference** YouTube `NAz5NGnaDKs` only so staff can click “Watch walkthrough”.
+- This is **not** a real-device film and does **not** claim the $100 by itself.
